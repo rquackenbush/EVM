@@ -217,6 +217,11 @@ void ExecuteProgram(unsigned char * program, unsigned char programSize, unsigned
 unsigned long fsize(char* file)
 {
     FILE * f = fopen(file, "r");
+
+	if (f == NULL) {
+		printf("No file!");
+	}
+
     fseek(f, 0, SEEK_END);
     unsigned long len = (unsigned long)ftell(f);
     fclose(f);

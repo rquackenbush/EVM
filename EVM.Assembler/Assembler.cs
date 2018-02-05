@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using EVM.Assembler.OpCodes;
 
 namespace EVM.Assembler
 {
@@ -103,7 +104,8 @@ namespace EVM.Assembler
 
                     if (string.IsNullOrWhiteSpace(labelName))
                     {
-                        messages.Add(new AssemblerMessage(ErrorLevel.Error, string.Format("Invalid label  on line {0}", sourceLine.LineNumber), sourceLine.LineNumber));
+                        messages.Add(new AssemblerMessage(ErrorLevel.Error,
+                            $"Invalid label  on line {sourceLine.LineNumber}", sourceLine.LineNumber));
                     }
                     else
                     {
@@ -127,13 +129,15 @@ namespace EVM.Assembler
                     //Check to see
                     if (opCodeInfo == null)
                     {
-                        messages.Add(new AssemblerMessage(ErrorLevel.Error, string.Format("Invalid instruction '{0}' on line {1}", instructionName, sourceLine.LineNumber), sourceLine.LineNumber));
+                        messages.Add(new AssemblerMessage(ErrorLevel.Error,
+                            $"Invalid instruction '{instructionName}' on line {sourceLine.LineNumber}", sourceLine.LineNumber));
                     }
                     else
                     {
                         if (numberOfArgumentsSpecified != opCodeInfo.NumberOfArguments)
                         {
-                            messages.Add(new AssemblerMessage(ErrorLevel.Error, string.Format("The instruction '{0}' takes {1} parameters but {2} were specified.", opCodeInfo.AssemblerKeyword, opCodeInfo.NumberOfArguments, numberOfArgumentsSpecified)));
+                            messages.Add(new AssemblerMessage(ErrorLevel.Error,
+                                $"The instruction '{opCodeInfo.AssemblerKeyword}' takes {opCodeInfo.NumberOfArguments} parameters but {numberOfArgumentsSpecified} were specified."));
                         }
                         else
                         {
@@ -191,14 +195,9 @@ namespace EVM.Assembler
         {
             if (parsedInstruction.OpCodeInfo.InstructionSize > 1)
             {
-                var generator = parsedInstruction.OpCodeInfo.InstructionGenerator;
-
-                if (generator == null)
-                    throw new Exception("The generator was null!!!!");
-
                 var context = new FinalAssembleContext(labels, messages, parsedInstruction);
 
-                var argumentBytes = generator.GenerateInstruction(context);
+                var argumentBytes = parsedInstruction.OpCodeInfo.GenerateInstruction(context);
 
                 if (argumentBytes == null)
                     return null;
@@ -209,13 +208,10 @@ namespace EVM.Assembler
                     return null;
                 }
 
-                return new byte[] { parsedInstruction.OpCodeInfo.OpCode }.Concat(argumentBytes).ToArray();
+                return new byte[] {(byte) parsedInstruction.OpCodeInfo.OpCode }.Concat(argumentBytes).ToArray();
             }
-            else
-            {
-                return new byte[] {parsedInstruction.OpCodeInfo.OpCode};
-            }
-               
+
+            return new byte[] { (byte)parsedInstruction.OpCodeInfo.OpCode};
         }
 
     }

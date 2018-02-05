@@ -1,10 +1,11 @@
 ﻿using System;
+using EVM.Assembler.OpCodes;
 
 namespace EVM.Assembler
 {
     public class ParsedInstruction
     {
-        public ParsedInstruction(SourceLine sourceLine, string[] arguments, OpCodeInfo opCodeInfo)
+        public ParsedInstruction(SourceLine sourceLine, string[] arguments, OpCodeService opCodeInfo)
         {
             this.SourceLine = sourceLine ?? throw new ArgumentNullException(nameof(sourceLine));
             this.Arguments = arguments ?? throw new ArgumentNullException(nameof(arguments));
@@ -15,6 +16,6 @@ namespace EVM.Assembler
 
         public string[] Arguments { get; }
 
-        public OpCodeInfo OpCodeInfo { get; }
+        public OpCodeService OpCodeInfo { get; }
     }
 }

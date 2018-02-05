@@ -9,7 +9,7 @@ namespace Evm.Assembler.Console
             var options = new AssemblerOptions()
             {
                 SourceFile = "HelloWorld.asm",
-                OutputFile = @"C:\Users\rich.quackenbush\Documents\Visual Studio 2013\Projects\EVM\Debug\HelloWorld.evm"
+                OutputFile = @"..\..\..\Debug\HelloWorld.evm"
             };
 
             var assembler = new EvmAssembler();
@@ -20,7 +20,7 @@ namespace Evm.Assembler.Console
             {
                 System.Console.WriteLine("{0}:{1} {2}", 
                     message.ErrorLevel, 
-                    message.LineNumber == null ? "" : string.Format("Line [{0}]", message.LineNumber),
+                    message.LineNumber == null ? "" : $"Line [{message.LineNumber}]",
                     message.Message);
             }
 
