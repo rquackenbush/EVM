@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
-using EVM.Assembler;
+﻿using EVM.Assembler;
 
 namespace Evm.Assembler.Console
 {
