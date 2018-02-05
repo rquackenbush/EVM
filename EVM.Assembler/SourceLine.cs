@@ -15,11 +15,11 @@ namespace EVM.Assembler
             this.Line = line;
         }
 
-        public int LineNumber { get; private set; }
+        public int LineNumber { get; }
 
         /// <summary>
         /// This is the original line of source code
         /// </summary>
-        public string Line { get; private set; }
+        public string Line { get; }
     }
 }

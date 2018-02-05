@@ -13,7 +13,7 @@ namespace EVM.Assembler
         public AssemblerResult Assemble(AssemblerOptions options)
         {
             if (options == null)
-                throw new ArgumentNullException("options");
+                throw new ArgumentNullException(nameof(options));
             
             List<AssemblerMessage> messages = new List<AssemblerMessage>();
             

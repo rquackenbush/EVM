@@ -16,18 +16,9 @@ namespace EVM.Assembler
             IList<AssemblerMessage> messages,
             ParsedInstruction parsedInstruction)
         {
-            if (labels == null)
-                throw new ArgumentNullException("labels");
-
-            if (messages == null)
-                throw new ArgumentNullException("messages");
-
-            if (parsedInstruction == null)
-                throw new ArgumentNullException("parsedInstruction");
-
-            _labels = labels;
-            _messages = messages;
-            _parsedInstruction = parsedInstruction;
+            _labels = labels ?? throw new ArgumentNullException(nameof(labels));
+            _messages = messages ?? throw new ArgumentNullException(nameof(messages));
+            _parsedInstruction = parsedInstruction ?? throw new ArgumentNullException(nameof(parsedInstruction));
         }
 
         /// <summary>

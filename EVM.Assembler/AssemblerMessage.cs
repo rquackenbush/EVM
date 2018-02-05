@@ -15,10 +15,10 @@ namespace EVM.Assembler
             this.LineNumber = lineNumber;
         }
 
-        public ErrorLevel ErrorLevel { get; private set; }
+        public ErrorLevel ErrorLevel { get; }
 
-        public int? LineNumber { get; private set; }
+        public int? LineNumber { get; }
 
-        public string Message { get; private set; }
+        public string Message { get; }
     }
 }

@@ -11,24 +11,15 @@ namespace EVM.Assembler
     {
         public ParsedInstruction(SourceLine sourceLine, string[] arguments, OpCodeInfo opCodeInfo)
         {
-            if(sourceLine == null)
-                throw new ArgumentNullException("sourceLine");
-
-            if (arguments == null)
-                throw new ArgumentNullException("arguments");
-
-            if (opCodeInfo == null)
-                throw new ArgumentNullException("opCodeInfo");
-
-            this.SourceLine = sourceLine;
-            this.Arguments = arguments;
-            this.OpCodeInfo = opCodeInfo;
+            this.SourceLine = sourceLine ?? throw new ArgumentNullException(nameof(sourceLine));
+            this.Arguments = arguments ?? throw new ArgumentNullException(nameof(arguments));
+            this.OpCodeInfo = opCodeInfo ?? throw new ArgumentNullException(nameof(opCodeInfo));
         }
 
-        public SourceLine SourceLine { get; private set; }
+        public SourceLine SourceLine { get; }
 
-        public string[] Arguments { get; private set; }
+        public string[] Arguments { get; }
 
-        public OpCodeInfo OpCodeInfo { get; private set; }
+        public OpCodeInfo OpCodeInfo { get; }
     }
 }

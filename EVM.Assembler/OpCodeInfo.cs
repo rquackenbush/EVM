@@ -12,19 +12,19 @@ namespace EVM.Assembler
             this.NumberOfArguments = numberOfArguments;
 
             if (instructionSize > 1 && instructionGenerator == null)
-                throw new ArgumentNullException("instructionGenerator", string.Format("[{0}]: instructionGenerator is required when the instruction size is greater than 1.", assemblerKeyword));
+                throw new ArgumentNullException(nameof(instructionGenerator), string.Format("[{0}]: instructionGenerator is required when the instruction size is greater than 1.", assemblerKeyword));
 
             this.InstructionGenerator = instructionGenerator;
         }
 
-        public byte OpCode { get; private set; }
+        public byte OpCode { get; }
         
-        public string AssemblerKeyword { get; private set; }
+        public string AssemblerKeyword { get; }
 
-        public byte InstructionSize { get; private set; }
+        public byte InstructionSize { get; }
 
-        public byte NumberOfArguments { get; private set; }
+        public byte NumberOfArguments { get; }
 
-        public IInstructionGenerator InstructionGenerator { get; private set; }
+        public IInstructionGenerator InstructionGenerator { get; }
     }
 }

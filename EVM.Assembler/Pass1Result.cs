@@ -10,18 +10,12 @@ namespace EVM.Assembler
     {
         public Pass1Result(IDictionary<string, byte> labels, ParsedInstruction[] parsedInstructions)
         {
-            if (labels == null)
-                throw new ArgumentNullException("labels");
-
-            if (parsedInstructions == null)
-                throw new ArgumentNullException("parsedInstructions");
-
-            this.Labels = labels;
-            this.ParsedInstructions = parsedInstructions;
+            this.Labels = labels ?? throw new ArgumentNullException(nameof(labels));
+            this.ParsedInstructions = parsedInstructions ?? throw new ArgumentNullException(nameof(parsedInstructions));
         }
 
-        public IDictionary<string, byte> Labels { get; private set; }
+        public IDictionary<string, byte> Labels { get; }
 
-        public ParsedInstruction[] ParsedInstructions { get; private set; }
+        public ParsedInstruction[] ParsedInstructions { get; }
     }
 }
